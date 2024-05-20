@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "53365118076",
+    "project_id": "urban-swap-64e31",
+    "storage_bucket": "urban-swap-64e31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53365118076:android:3c9450852844c8d6e765f9",
+        "android_client_info": {
+          "package_name": "com.japhethnyaranga.urban_swap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53365118076-bhlbrj6j4v48v4eme8fa8oa58nmueusm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.japhethnyaranga.urban_swap",
+            "certificate_hash": "ee2ef4b4e856fc6f1473e4deb57f12bdd10cfa38"
+          }
+        },
+        {
+          "client_id": "53365118076-nkh99gu2nu868p84ojm8j0l479p4nqod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdvWN-9TdZhSrCeScGjSrIoXLdNG-gEQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53365118076-nkh99gu2nu868p84ojm8j0l479p4nqod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

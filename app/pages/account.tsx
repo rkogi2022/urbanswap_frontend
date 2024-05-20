@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native'; // Import Text from react-native
 
-const CreateAccount = () => {
+const AccountPage = () => {
     return (
         <View style={styles.container}>
-            <Text>Airtime page</Text>
+            <Text>Account page</Text>
         </View>
     );
 }
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CreateAccount;
+export default AccountPage;

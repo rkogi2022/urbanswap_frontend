@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native'; // Import Text from react-native
 
-const loginpage = () => {
+const ActivityPage = () => {
     return (
         <View style={styles.container}>
-            <Text>Login Page</Text>
+            <Text>Activity page</Text>
         </View>
     );
 }
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default loginpage;
+export default ActivityPage;
