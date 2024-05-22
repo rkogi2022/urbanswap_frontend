@@ -3,15 +3,16 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA3YvuTqk54KVdh41ymBs4FM0-P7NXOkqE",
-  authDomain: "urbanswapke.firebaseapp.com",
-  databaseURL: "https://urbanswapke-default-rtdb.firebaseio.com",
-  projectId: "urbanswapke",
-  storageBucket: "urbanswapke.appspot.com",
-  messagingSenderId: "259973875899",
-  appId: "1:259973875899:web:d5c8fe9e1cb4705319c19e",
-  measurementId: "G-QE92HYW9XG"
+
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyAcNudYg5YVc3mITZhDn0gJJRkdwMShk2M",
+  authDomain: "urban-swap-f3ad0.firebaseapp.com",
+  projectId: "urban-swap-f3ad0",
+  storageBucket: "urban-swap-f3ad0.appspot.com",
+  messagingSenderId: "148676236160",
+  appId: "1:148676236160:web:463a6253d38ccc690da765",
+  measurementId: "G-91H6L9XV6F"
 };
 
 if(!firebase.apps.length){

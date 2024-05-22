@@ -11,6 +11,7 @@
 * react-native-vector-icons
 * react-navigation/stack
 * firebase
+* expo-secure-store 
 
 
 

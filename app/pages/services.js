@@ -1,16 +1,30 @@
 // ServicesScreen.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type ServicesScreenNavigationProp = StackNavigationProp<
-  { [key: string]: undefined },
-  'ServicesScreen' 
->;
+import { checkTokens } from '@/functions/ValidateAuthentication';
+
+
 
 const ServicesScreen = () => {
-  const navigation = useNavigation<ServicesScreenNavigationProp>();
+  const navigation = useNavigation();
+
+
+  useEffect(() => {
+    checkAndRedirect();
+  }, []);
+
+
+
+  const checkAndRedirect = async () => {
+    const hasTokens = await checkTokens();
+    if (!hasTokens) {
+        navigation.navigate('LoginScreen'); 
+    }
+  };
+
 
   const navigateAirtime = () => {
     navigation.navigate('Airtime');

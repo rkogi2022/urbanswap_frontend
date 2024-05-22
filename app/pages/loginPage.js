@@ -1,11 +1,12 @@
 import CountryInputBox from '@/components/countryInputBox';
 import CustomPressableButton from '@/components/customButton';
 import { useNavigation } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
 
 
 import {loginStyles} from '../../assets/styles/login';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 
 import firebase from 'firebase/compat/app';
@@ -21,6 +22,18 @@ const Loginpage = () => {
   const recaptchaVerifier = useRef(null)
   const navigation = useNavigation();
 
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = await SecureStore.getItemAsync('authToken');
+      if (token) {
+        navigation.navigate('home');
+      }
+    };
+
+    checkToken();
+  }, []);
+
     const navigateRegister = () => {
         navigation.navigate('Register');
     };
@@ -31,7 +44,8 @@ const Loginpage = () => {
  
   const loginVerification = () => {
     const phoneProvider = new firebase.auth.PhoneAuthProvider();
-    phoneProvider.verifyPhoneNumber(phoneNumber, recaptchaVerifier.current)
+    const formattedPhoneNumber = phoneNumber.length === 9 ? `+254${phoneNumber}` : (phoneNumber.startsWith('0') ? `+254${phoneNumber.slice(1)}` : phoneNumber);
+    phoneProvider.verifyPhoneNumber(formattedPhoneNumber, recaptchaVerifier.current)
       .then((verificationId) => {
         setVerificationId(verificationId);
         setPhoneNumber(''); 

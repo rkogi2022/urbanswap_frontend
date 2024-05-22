@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions, Image, SafeAreaView } from 'react-native';
+import { View, Text, Dimensions, Image, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import {splashScreenStyles} from '@/assets/styles/splashScreen';
 
 import Svg, { Path } from "react-native-svg";
 
@@ -9,21 +10,21 @@ const SplashScreen = () => {
   const imageHeight = height / 1.5; // Set image height to cover half of the screen
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={splashScreenStyles.container}>
       <LinearGradient
         colors={['#0B60D0', '#003D8D', '#001128']}
-        style={[styles.container, styles.linearGradient]}
+        style={[splashScreenStyles.container, splashScreenStyles.linearGradient]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <View style={styles.content}>
-          <View style={styles.upperComponent}>
+        <View style={splashScreenStyles.content}>
+          <View style={splashScreenStyles.upperComponent}>
             <Image 
               source={require('../../assets/images/u_logo.png')} 
               style={{ width: 80, height: 80 }} 
             />
             
-            <Text style={styles.text}>UrbanSwap</Text>
+            <Text style={splashScreenStyles.text}>UrbanSwap</Text>
           </View>
          
           <Svg width="430" height="592" viewBox="0 0 430 592" fill="none">
@@ -35,35 +36,6 @@ const SplashScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  linearGradient: {
-    flex: 1,
-  },
-  content: {
-    flex: 1, 
-    justifyContent: 'flex-end', 
-    alignItems: 'center',
-  },
-  logo: {
-    width: '100%', 
-  },
-  text: {
-    fontSize: 34,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  upperComponent :{
-    zIndex:1,
-    alignItems: 'center',
-    justifyContent:'center',
-    paddingBottom:470,
-    position:'absolute',
-  }
-});
+
 
 export default SplashScreen;

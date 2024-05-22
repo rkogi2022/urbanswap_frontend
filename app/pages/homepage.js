@@ -3,33 +3,50 @@ import { StyleSheet, View, Text, Dimensions, TextInput, Image } from 'react-nati
 import MapView, { Marker, Region } from 'react-native-maps';
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
+import { checkTokens } from '@/functions/ValidateAuthentication';
 
 
 const Homepage = () => {
-    const [region, setRegion] = useState<Region | null>(null);
+    const [region, setRegion] = useState(null);
     const [text, setText] = useState('');
     const [destination, setDestination] = useState('');
 
-    const handleInputChange = (inputText: React.SetStateAction<string>) => {
+    const navigation = useNavigation();
+
+    const handleInputChange = (inputText ) => {
         setText(inputText);
     };
 
     useEffect(() => {
-        const fetchLocation = async () => {
-            const { granted } = await requestForegroundPermissionsAsync();
-            if (granted) {
-                const { coords } = await getCurrentPositionAsync({});
-                setRegion({
-                    latitude: coords.latitude,
-                    longitude: coords.longitude,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                });
-            }
-        };
-
+        checkAndRedirect();
         fetchLocation();
     }, []);
+
+    
+    const checkAndRedirect = async () => {
+        const hasTokens = await checkTokens();
+        if (!hasTokens) {
+            navigation.navigate('LoginScreen'); 
+        }
+    };
+
+    const fetchLocation = async () => {
+        const { granted } = await requestForegroundPermissionsAsync();
+        if (granted) {
+            const { coords } = await getCurrentPositionAsync({});
+            setRegion({
+                latitude: coords.latitude,
+                longitude: coords.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            });
+        }
+    };
+    
+
+    
 
     return (
         <View style={styles.container}>
@@ -113,11 +130,13 @@ const styles = StyleSheet.create({
     },
     bottomContainer: {
         paddingHorizontal: 20,
-        paddingTop:50,
-        borderRadius:20,
+        paddingTop: 50,
         backgroundColor: '#fff',
+        borderTopLeftRadius: 20,  // Add border radius for top left corner
+        borderTopRightRadius: 20, // Add border radius for top right corner
         width: '100%',
     },
+    
     input: {
         borderWidth: 1,
         borderColor: '#ccc',

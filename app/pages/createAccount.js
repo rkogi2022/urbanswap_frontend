@@ -1,18 +1,14 @@
 import CountryInputBox from '@/components/countryInputBox';
 import CustomPressableButton from '@/components/customButton';
 import PlainInputBox from '@/components/plainInputBox';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Svg, { Path } from "react-native-svg"
 
 import { useNavigation } from '@react-navigation/native';
 
-
-
-
 import {createAccountStyles} from '../../assets/styles/createAccount';
-
 
 import * as Google from "expo-auth-session/providers/google";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,7 +19,7 @@ import {FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 
 import firebase from 'firebase/compat/app'
 
-
+import firebaseConfig from '../../firebaseConfig';
 
 
 
@@ -57,7 +53,6 @@ const CreateAccount = () => {
 
   async function handleEffect() {
     const user = await getLocalUser();
-    console.log("user", user);
     if (!user) {
       if (response?.type === "success" && response.authentication) {
         getUserInfo(response.authentication.accessToken);
@@ -65,7 +60,6 @@ const CreateAccount = () => {
     
     } else {
       setUserInfo(user);
-      console.log("loaded locally");
     }
   }
   const getLocalUser = async () => {
@@ -92,30 +86,28 @@ const CreateAccount = () => {
     }
   };
 
-
-
   
   const sendVerification = () => {
     const phoneProvider = new firebase.auth.PhoneAuthProvider();
-    phoneProvider.verifyPhoneNumber(phoneNumber, recaptchaVerifier.current)
+    const formattedPhoneNumber = phoneNumber.length === 9 ? `+254${phoneNumber}` : (phoneNumber.startsWith('0') ? `+254${phoneNumber.slice(1)}` : phoneNumber);
+    phoneProvider.verifyPhoneNumber(formattedPhoneNumber, recaptchaVerifier.current)
       .then((verificationId) => {
         setVerificationId(verificationId);
         setPhoneNumber(''); 
         navigation.navigate('OtpPage', {
+          fromRegister: true,
           firstName: firstName,
           lastName: lastName,
           email: email,
-          phoneNumber: phoneNumber,
+          phoneNumber: formattedPhoneNumber,
           verificationId : verificationId
         });
       })
       .catch((error) => {
         console.error('Error sending verification:', error);
-        // Handle error
       });
   };
 
-  
   
   return (
     <View style={createAccountStyles.container}>
@@ -124,6 +116,7 @@ const CreateAccount = () => {
         ref={recaptchaVerifier}
         firebaseConfig={firebase.apps.length ? firebase.app().options : undefined} // Pass Firebase configuration directly
       />
+     
      
 
       <Text style={createAccountStyles.message}>Create your account</Text>
