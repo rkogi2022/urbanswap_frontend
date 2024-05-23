@@ -30,7 +30,7 @@
 
 #  Contributing
 1. Clone repository
-2. The `main` branch is the base branch
+2. The `develop` branch is the base branch
 3. Create your working branch off this branch
 4. Push your working branch
 5. Create a pull request against the base branch (`main).

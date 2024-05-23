@@ -11,6 +11,7 @@ npm-debug.*
 web-build/
 .env
 .expo-env.d.ts
+.firebaseConfig.tsx
 
 # macOS
 .DS_Store
