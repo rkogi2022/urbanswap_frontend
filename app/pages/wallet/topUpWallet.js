@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import RadioButtonRN from 'radio-buttons-react-native';
+import RadioButtonRN from 'react-native-radio-buttons';
 
 const TopUpWallet = ({ navigation }) => {
     const paymentMethods = [
