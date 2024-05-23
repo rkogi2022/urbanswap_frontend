@@ -15,50 +15,53 @@ const TripDetailsPage = () => {
       <ScrollView style={styles.vehicleTypesContainer}>
         <Text style={styles.title}>Trip Details</Text>
 
-         <View style={styles.startPoint}>
-          <Text>Westlands Square</Text>
-         </View>
-         <View style={styles.endPoint}>
-            <Text>Kenyatta International Convention</Text>
+        <View style={styles.startPoint}>
+          <Text style={styles.destText}>Westlands Square</Text>
+        </View>
+        <View style={styles.endPoint}>
+          <Text style={styles.destText}>Kenyatta International Convention</Text>
 
-            <TouchableOpacity onPress={() => console.log("Edit pressed")} style={styles.button}>
-              <View >
-                <Text>Edit</Text>
-              </View>
-            </TouchableOpacity>
-         </View>
-       
-        
-          <View style={styles.amount}>
-          <Ionicons name="person" size={17} />
-              <Text>Ksh450</Text>
+          <TouchableOpacity onPress={() => console.log("Edit pressed")} style={styles.button}>
+            <View >
+              <Text>Edit</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
 
-              <TouchableOpacity onPress={() => console.log("Edit pressed")} style={styles.button}>
-                <View >
-                  <Text>Switch</Text>
-                </View>
-              </TouchableOpacity>
+
+        <View style={styles.amount}>
+          <Ionicons name="person" size={17} color="#003D8E" />
+          <View>
+            <Text style={styles.destText}>Ksh450</Text>
+            <Text style={styles.cashText}>Cash</Text>
           </View>
-        
-         <TouchableOpacity style={styles.buttonComponent}>
+
+          <TouchableOpacity onPress={() => console.log("Edit pressed")} style={styles.button}>
+            <View >
+              <Text>Switch</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.buttonComponent}>
           <Text>Cancel trip</Text>
-         </TouchableOpacity>
-   
-        <CustomPressableButton title="Done"  showIcon={false} style={styles.mainButton}/>
+        </TouchableOpacity>
+
+        <CustomPressableButton title="Done" showIcon={false} style={styles.mainButton} />
       </ScrollView>
     </View>
   );
 };
 
-const chooseRide = () => {};
+const chooseRide = () => { };
 
 const styles = StyleSheet.create({
   container: {
     flex: 3,
     backgroundColor: "#fff",
   },
-  endPoint:{
-    
+  endPoint: {
+
   },
   mapContainer: {
     flex: 1.6,
@@ -73,19 +76,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: "#FFFFFF",
   },
-  startPoint:{
-    paddingTop:10,
-    paddingBottom:10
+  startPoint: {
+    paddingTop: 10,
+    paddingBottom: 10
   },
-  endPoint:{
-    paddingBottom:10,
-    flexDirection:'row',
-    justifyContent:'space-between'
+  endPoint: {
+    paddingBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
-  amount:{
-    paddingBottom:10,
-    flexDirection:'row',
-    justifyContent:'space-between'
+  amount: {
+    paddingBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   card: {
     backgroundColor: "#fff",
@@ -95,10 +98,10 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#E3E3E3",
-    padding:10,
-    borderRadius:10
+    padding: 10,
+    borderRadius: 10
   },
- 
+
   buttonComponent: {
     backgroundColor: '#E1E1E1',
     flexDirection: 'row',
@@ -110,15 +113,22 @@ const styles = StyleSheet.create({
     elevation: 3,
     height: 50,
     width: '100%',
-    marginBottom:10
+    marginBottom: 10
   },
- 
-  title:{
-    textAlign:'center',
-    fontSize:20,
+
+  title: {
+    textAlign: 'center',
+    fontSize: 20,
   },
-  mainButton:{
-    marginTop:10
+  mainButton: {
+    marginTop: 10
+  },
+  destText: {
+    fontWeight: '700'
+  },
+  cashText: {
+    color: '#838383',
+    fontSize: 12
   }
 });
 

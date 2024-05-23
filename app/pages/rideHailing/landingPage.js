@@ -12,10 +12,7 @@ const RideHailingLandingPage = () =>{
 
     return(
         <View style={styles.container}>
-
-
                 <Text style={styles.customiseTitle}>Customise your trip</Text>
-            
                
                 <TextInput
                     style={styles.input}
@@ -37,47 +34,57 @@ const RideHailingLandingPage = () =>{
 
                 <View style={styles.destinationsField}>
                     <View style={styles.iconStyle}>
-                        <Ionicons name="home" size={17} />
+                        <Ionicons name="home" size={17} color='#838383' />
                     </View>
                     <View>
                         <Text style={styles.title}>Work</Text>
-                        <Text style={styles.body}>WorkAddress</Text>
+                        <Text style={styles.body}>Kenyatta International Convention Center</Text>
                     </View>
                     
                 </View>
                 <View style={styles.destinationsField}>
                     <View style={styles.iconStyle}>
-                        <Ionicons name="home" size={17} />
+                        <Ionicons name="home" size={17} color='#838383' />
                     </View>
                     <View>
-                        <Text style={styles.title}>Work</Text>
-                        <Text style={styles.body}>WorkAddress</Text>
+                        <Text style={styles.title}>Home</Text>
+                        <Text style={styles.body}>54 kitusuru, Nairobi</Text>
                     </View>
                     
                 </View>
                 <View style={styles.destinationsField}>
                     <View style={styles.iconStyle}>
-                        <Ionicons name="location" size={17} />
+                        <Ionicons name="location" size={17} color='#838383'/>
                     </View>
                     <View>
-                        <Text style={styles.title}>Work</Text>
-                        <Text style={styles.body}>WorkAddress</Text>
+                        <Text style={styles.title}>Village Market</Text>
+                        <Text style={styles.body}>Limuru Road, Nairobi</Text>
                     </View>
                     
                 </View>
                 <View style={styles.destinationsField}>
                     <View style={styles.iconStyle}>
-                        <Ionicons name="location" size={17} />
+                        <Ionicons name="location" size={17} color='#838383'/>
                     </View>
                     <View>
-                        <Text style={styles.title}>Work</Text>
-                        <Text style={styles.body}>WorkAddress</Text>
+                        <Text style={styles.title}>Nairobi Hospital Doctor's Plaza</Text>
+                        <Text style={styles.body}>Argwings Kodhek Road, Nairobi</Text>
+                    </View>
+                    
+                </View>
+                <View style={styles.destinationsField}>
+                    <View style={styles.iconStyle}>
+                        <Ionicons name="location" size={17} color='#838383'/>
+                    </View>
+                    <View>
+                        <Text style={styles.title}>Uganda House</Text>
+                        <Text style={styles.body}>Kenyatta Avenue, Nairobi</Text>
                     </View>
                     
                 </View>
 
                 <View style={styles.setLocation}>
-                    <Ionicons name="location" size={17} />
+                    <Ionicons name="location" size={17}  color='#838383'/>
                     <Text>Set location on map</Text>
                 </View>
            

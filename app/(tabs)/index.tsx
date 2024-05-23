@@ -2,9 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import SplashScreen from '../pages/splashScreen';
 import AppNavigator from '@/components/navigation/AppNavigator';
-import Loginpage from '../pages/loginPage';
-import OtpScreen from '../pages/otpPage';
-import CreateAccount from '../pages/createAccount';
 import AuthScreenNav from '@/components/navigation/AuthScreens';
 
 
@@ -50,8 +47,7 @@ export default function Index() {
 
   // Render login screen if user is not logged in
   if (!isLoggedIn) {
-    return <AuthScreenNav />;
-  
+    return <AuthScreenNav />;  
   }
 
   // Render the main app navigator if user is logged in

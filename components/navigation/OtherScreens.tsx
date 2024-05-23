@@ -5,6 +5,7 @@ import CreateAccount from '@/app/pages/createAccount';
 import OtpScreen from '@/app/pages/otpPage';
 import PaymentNumber from '@/app/pages/paymentNumber';
 import { createStackNavigator } from '@react-navigation/stack';
+import RideHailingLandingPage from '@/app/pages/rideHailing/landingPage';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,13 @@ const ServicesStack = () => {
           component={PaymentNumber}
           options={{ headerShown:false }}
         />  
+
+        <Stack.Screen
+          name="RideHailingLandingPage"
+          component={RideHailingLandingPage}
+          options={{ headerShown:false }}
+        /> 
+
       </Stack.Navigator>
     );
   };

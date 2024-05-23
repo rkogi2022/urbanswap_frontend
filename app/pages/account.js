@@ -95,7 +95,9 @@ const AccountPage = () => {
                     <Text>Legal</Text>
                 </Pressable>
 
-                <Pressable style={styles.iconData}>
+                <Pressable style={styles.iconData} 
+                // onPress={logout()}
+                >
                     <Ionicons name="person" size={15} />
                     <Text>Logout</Text>
                 </Pressable>

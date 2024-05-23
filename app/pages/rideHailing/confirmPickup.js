@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, ScrollView } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import MapView from "react-native-maps";
 import CustomPressableButton from "@/components/customButton";
 
-import Svg, { Path } from "react-native-svg";
 
 const ConfirmPickUpPage = () => {
   const [destination, setDestination] = useState("");
@@ -15,20 +14,25 @@ const ConfirmPickUpPage = () => {
       <View style={styles.mapContainer}>
         <MapView style={styles.map} />
       </View>
-      <View style={styles.vehicleTypesContainer}>
-        
-
-
-        <View style={styles.card}>
-            <Text style={styles.cashText}>Westlands Square</Text>
-            <View style={styles.payment}>   
-            <Text>Economy</Text>
-            <Text>Ksh 500</Text>
+      <ScrollView style={styles.vehicleTypesContainer}>
+        <View >
+          <View style={styles.card}>
+            <View style={styles.topLocation}>
+              <Text style={styles.cashText}>Westlands Square</Text>
+              {/* <View style={styles.search}>
+                <Text>Search</Text>
+              </View> */}
             </View>
-            
-            <CustomPressableButton title="Confirm Pickup point" onPress={chooseRide} showIcon={false} />
+
+            <View style={styles.payment}>
+              <Text style={styles.levelStyle}>Economy</Text>
+              <Text style={styles.levelStyle}>Ksh 500</Text>
+            </View>
+
+            <CustomPressableButton title="Confirm Pickup point" showIcon={false} />
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -51,25 +55,35 @@ const styles = StyleSheet.create({
   },
   vehicleTypesContainer: {
     flex: 0.5,
-   
 
-    backgroundColor:'#E5E5E5'
+
+    backgroundColor: '#E5E5E5'
   },
-  cashText:{
-    textAlign:'center',
-    paddingTop:10,
-    paddingBottom:10
+  cashText: {
+    fontSize: 28,
+    paddingTop: 10,
+    paddingBottom: 10
   },
-  card:{
+  card: {
     backgroundColor: "#fff",
     borderRadius: 10,
     elevation: 10,
     padding: 20,
   },
-  payment:{
+  payment: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center", // Center horizontally
+    paddingBottom: 10,
+  },
+  levelStyle: {
+    color: '#838383',
+    paddingRight:10
+  },
+  // search:{
+  //   backgroundColor:'#EFEFEF',
+  //   paddingHorizontal:5
+  // },
+  topLocation:{
+    flexDirection:'row'
   }
 });
 

@@ -8,6 +8,8 @@ import Homepage from '@/app/pages/homepage';
 import AccountPage from '@/app/pages/account';
 import ActivityPage from '@/app/pages/activityPage';
 import ServicesStack from './OtherScreens';
+import RideHailingLandingPage from '@/app/pages/rideHailing/landingPage';
+import RideHailingStack from './RideHailingRoutes';
 
 
 
@@ -22,7 +24,7 @@ const AppNavigator = () => {
     <Tab.Navigator initialRouteName="Home" screenOptions={{ tabBarActiveTintColor: '#003D8E' }}>
       <Tab.Screen
         name="Home"
-        component={Homepage}
+        component={RideHailingStack}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
