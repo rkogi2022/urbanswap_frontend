@@ -2,7 +2,31 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const MpesaTopup = ({ navigation }) => {
+import { useEffect, useState } from 'react';
+import { RadioButton } from 'react-native-paper'; 
+import { checkTokens } from '@/functions/ValidateAuthentication';
+import { useNavigation } from '@react-navigation/native';
+
+const MpesaTopup = () => {
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        checkAndRedirect();
+    }, []);
+
+
+    const checkAndRedirect = async () => {
+        const hasTokens = await checkTokens();
+        if (!hasTokens) {
+            navigation.navigate('LoginScreen');
+        }
+    };
+    const navigateToAddPaymentMethod = () =>{
+    navigation.navigate('AddPaymentMethod'); 
+}
+const navigateUrbanWallet = () =>{
+    navigation.navigate('UrbanWallet'); 
+}
     return (
         <ScrollView contentContainerStyle={styles.container}>
             {/* Back Feature */}
@@ -26,7 +50,7 @@ const MpesaTopup = ({ navigation }) => {
             </View>
 
             {/* Top Up Button */}
-            <TouchableOpacity style={styles.topUpButton}>
+            <TouchableOpacity onPress={navigateUrbanWallet} style={styles.topUpButton}>
                 <Text style={styles.topUpButtonText}>Top up</Text>
             </TouchableOpacity>
         </ScrollView>
@@ -95,7 +119,7 @@ const styles = StyleSheet.create({
         elevation: 3,
         height: 50,
         width: '100%', 
-        top: 494,
+        top: 450,
     },
     topUpButtonText: {
         fontSize: 16,

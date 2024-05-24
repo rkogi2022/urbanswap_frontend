@@ -2,11 +2,35 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const AddCard = ({ navigation }) => {
+import { useEffect, useState } from 'react';
+import { checkTokens } from '@/functions/ValidateAuthentication';
+import { useNavigation } from '@react-navigation/native';
+
+const AddCard = () => {
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        checkAndRedirect();
+    }, []);
+
+
+    const checkAndRedirect = async () => {
+        const hasTokens = await checkTokens();
+        if (!hasTokens) {
+            navigation.navigate('LoginScreen');
+        }
+    };
+
+    const navigateToAddPaymentMethod = () =>{
+    navigation.navigate('AddPaymentMethod'); 
+}
+const navigateUrbanWallet = () =>{
+    navigation.navigate('UrbanWallet'); 
+}
     return (
         <ScrollView contentContainerStyle={styles.container}>
             {/* Back Feature */}
-            <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+            <TouchableOpacity style={styles.backButton} onPress={navigateToAddPaymentMethod}>
                 <Text style={styles.backText}>&lt; {} Back {}</Text>
             </TouchableOpacity>
 
@@ -51,7 +75,7 @@ const AddCard = ({ navigation }) => {
             </View>
 
             {/* Submit Button */}
-            <TouchableOpacity style={styles.submitButton}>
+            <TouchableOpacity onPress={navigateUrbanWallet} style={styles.submitButton}>
                 <Text style={styles.saveText}>Save</Text>
             </TouchableOpacity>
         </ScrollView>
@@ -151,7 +175,7 @@ const styles = StyleSheet.create({
         elevation: 3,
         height: 50,
         width: '100%', 
-        top: 220,       
+        top: 180,       
         
     },
     saveText: {

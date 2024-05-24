@@ -1,20 +1,46 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import RadioButtonRN from 'react-native-radio-buttons';
+import Icon from '@expo/vector-icons/Ionicons';
 
-const TopUpWallet = ({ navigation }) => {
+import { useEffect, useState } from 'react';
+import { RadioButton } from 'react-native-paper'; 
+import { checkTokens } from '@/functions/ValidateAuthentication';
+import { useNavigation } from '@react-navigation/native';
+
+
+const TopUpWallet = () => {
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        checkAndRedirect();
+    }, []);
+
+
+    const checkAndRedirect = async () => {
+        const hasTokens = await checkTokens();
+        if (!hasTokens) {
+            navigation.navigate('LoginScreen');
+        }
+    };
+
+    const navigateUrbanWallet = () =>{
+        navigation.navigate('UrbanWallet'); 
+    }
+    const navigateMpesaTopup = () =>{
+      navigation.navigate('MpesaTopup'); 
+  }
     const paymentMethods = [
         { label: 'M-Pesa', icon: 'wallet' },
         { label: 'Visa        .....1122', icon: 'card' },
         { label: 'Mastercard      .....0439', icon: 'card' },
         { label: 'Cash', icon: 'cash' },
     ];
-
+    const [selectedValue, setSelectedValue] = useState('M-Pesa');
+    
     return (
         <ScrollView contentContainerStyle={styles.container}>
             {/* Back Feature */}
-            <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+            <TouchableOpacity style={styles.backButton} onPress={navigateUrbanWallet }>
                 <Text style={styles.backText}>&lt; {} Back {}</Text>
             </TouchableOpacity>
 
@@ -39,26 +65,29 @@ const TopUpWallet = ({ navigation }) => {
             <Text style={styles.paymentMethodsTitle}>Choose a payment method</Text>
 
             {/* Payment Methods List */}
+            {/* Payment Methods List */}
             <View style={styles.paymentMethodsContainer}>
                 {paymentMethods.map((method, index) => (
-                    <View key={index} style={styles.paymentMethodRow}>
+                    <TouchableOpacity
+                        key={index}
+                        style={styles.paymentMethodRow}
+                        onPress={() => setSelectedValue(method.label)} // Set selected value to current item's label
+                    >
                         <Icon name={method.icon} size={24} color="#003D8E" style={styles.paymentIcon} />
                         <Text style={styles.paymentMethodText}>{method.label}</Text>
-                        <View style={styles.radioButton}>
-                            <RadioButtonRN
-                                data={[{ label: '' }]}
-                                selectedBtn={() => {}}
-                                box={false}
-                                circleSize={16}
-                                activeColor='#003D8E'
-                            />
-                        </View>
-                    </View>
+                        <RadioButton.Android
+                            value={method.label} // Set value to current item's label
+                            status={selectedValue === method.label ? 'checked' : 'unchecked'} // Check if current item's label matches selected value
+                            onPress={() => setSelectedValue(method.label)} // Set selected value to current item's label
+                            color="#007BFF"
+                        />
+                    </TouchableOpacity>
                 ))}
             </View>
 
+
             {/* Continue Button */}
-            <TouchableOpacity style={styles.continueButton}>
+            <TouchableOpacity onPress={navigateMpesaTopup} style={styles.continueButton}>
                 <Text style={styles.continueButtonText}>Continue</Text>
             </TouchableOpacity>
         </ScrollView>
@@ -74,7 +103,7 @@ const styles = StyleSheet.create({
     backButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 24,
+        marginTop: 13,
     },
     backText: {
         color: 'black',
@@ -129,9 +158,9 @@ const styles = StyleSheet.create({
         color: 'black',
         flex: 1,
     },
-    radioButton: {
-        alignItems: 'flex-end',
-    },
+    // radioButton: {
+    //     alignItems: 'flex-end',
+    // },
     continueButton: {
         backgroundColor: '#003D8E',
         flexDirection: 'row',
@@ -143,7 +172,7 @@ const styles = StyleSheet.create({
         elevation: 3,
         height: 50,
         width: '100%', 
-        top: 225,  
+        top: 180,  
     },
     continueButtonText: {
         fontSize: 16,
@@ -152,7 +181,6 @@ const styles = StyleSheet.create({
         letterSpacing: 0.25,
         marginLeft: 16, // Adjust spacing between text and icon
     },
-    
 });
 
 export default TopUpWallet;

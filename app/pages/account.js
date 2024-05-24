@@ -1,19 +1,34 @@
 import CustomPressableButton from '@/components/customButton';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, View, Text, Image, Pressable, Touchable } from 'react-native'; // Import Text from react-native
+import { StyleSheet, View, Text, Image, Pressable, TouchableOpacity } from 'react-native'; // Import Text from react-native
 import * as SecureStore from 'expo-secure-store';
 import { Path, Svg } from 'react-native-svg';
 import { Ionicons } from '@expo/vector-icons';
-
-
+import { useEffect, useState } from 'react';
+import { checkTokens } from '@/functions/ValidateAuthentication';
 
 
 
 const AccountPage = () => {
-
-
     const navigation = useNavigation();
+
+    useEffect(() => {
+        checkAndRedirect();
+    }, []);
+
+
+    const checkAndRedirect = async () => {
+        const hasTokens = await checkTokens();
+        if (!hasTokens) {
+            navigation.navigate('LoginScreen');
+        }
+    };
+
+
+    const navigateToUrbanWallet = () =>{
+        navigation.navigate('UrbanWallet'); 
+    }
 
     const logout = async () => {
         try {
@@ -31,7 +46,7 @@ const AccountPage = () => {
         <View style={styles.container}>
             <View style={styles.topSection}>
                 <View style={styles.driverSection}>
-                    <Text>Japheth Nyaranga</Text>
+                    <Text>Ms Kogi</Text>
                     <View style={styles.ratingContainer}>
                         <Svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <Path fill-rule="evenodd" clip-rule="evenodd" d="M7.35181 0.421661L8.94212 3.90115C8.95815 3.93835 8.98392 3.97052 9.0167 3.9943C9.04949 4.01808 9.08808 4.03257 9.12841 4.03626L12.929 4.47354C13.0541 4.48729 13.1727 4.53686 13.2703 4.61631C13.368 4.69577 13.4406 4.80172 13.4796 4.92145C13.5185 5.04118 13.522 5.1696 13.4898 5.29129C13.4575 5.41299 13.3908 5.52278 13.2977 5.6075L10.48 8.19486C10.4494 8.22158 10.4266 8.25608 10.414 8.29472C10.4014 8.33336 10.3994 8.37469 10.4084 8.41433L11.167 12.164C11.1927 12.2872 11.1823 12.4152 11.1369 12.5326C11.0916 12.65 11.0133 12.7518 10.9115 12.8257C10.8097 12.8997 10.6887 12.9426 10.563 12.9494C10.4373 12.9561 10.3124 12.9264 10.2032 12.8639L6.87145 10.9837C6.83638 10.9633 6.79655 10.9526 6.75601 10.9526C6.71546 10.9526 6.67564 10.9633 6.64057 10.9837L3.30804 12.8639C3.19885 12.9263 3.07397 12.9558 2.9484 12.949C2.82283 12.9421 2.7019 12.8992 2.60015 12.8253C2.4984 12.7514 2.42014 12.6496 2.37479 12.5324C2.32943 12.4151 2.3189 12.2872 2.34446 12.164L3.10298 8.41433C3.11197 8.37469 3.11005 8.33336 3.09745 8.29472C3.08484 8.25608 3.06201 8.22158 3.03138 8.19486L0.21434 5.6072C0.121079 5.52254 0.0542604 5.41274 0.0219187 5.29101C-0.0104229 5.16928 -0.00691023 5.0408 0.0320343 4.92101C0.0709789 4.80123 0.143697 4.69525 0.241444 4.61581C0.339191 4.53637 0.457804 4.48686 0.58302 4.47324L4.38421 4.03596C4.42454 4.03227 4.46313 4.01778 4.49591 3.994C4.5287 3.97022 4.55447 3.93805 4.5705 3.90085L6.16021 0.421661C6.21179 0.306811 6.29548 0.209319 6.40118 0.140921C6.50688 0.0725223 6.63011 0.0361328 6.75601 0.0361328C6.88191 0.0361328 7.00513 0.0725223 7.11084 0.140921C7.21654 0.209319 7.30022 0.306811 7.35181 0.421661Z" fill="#F7D000" />
@@ -56,7 +71,7 @@ const AccountPage = () => {
 
                     <Text style={styles.section2Text}>Help</Text>
                 </View>
-
+                <TouchableOpacity onPress={navigateToUrbanWallet}>
                 <View style={styles.walletSection}>
                     <Svg width="42" height="33" viewBox="0 0 42 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <Path d="M39.8848 15.2395H37.7959V12.6927C37.7959 12.6876 37.7907 12.6824 37.7907 12.6773C37.7805 10.326 36.1598 8.36062 33.9783 7.79467V1.27081C33.9783 0.571094 33.4124 0 32.7075 0H5.07886C3.76174 0 2.45491 0.540224 1.48251 1.4869C0.53583 2.43358 -0.00439453 3.74041 -0.00439453 5.06782V27.9322C-0.00439453 30.7259 2.27484 33 5.07886 33H32.7178C34.0761 33 35.352 32.4701 36.309 31.5131C37.2711 30.5561 37.7959 29.2802 37.7959 27.9322V27.927V25.3957H39.8848C40.5845 25.3957 41.1556 24.8246 41.1556 24.1249V16.5103C41.1556 15.8054 40.5896 15.2395 39.8848 15.2395ZM3.26782 3.29794C3.7566 2.81946 4.4203 2.54163 5.07886 2.54163H31.447V7.61459H5.07886C3.67428 7.61459 2.53723 6.4724 2.53723 5.07297C2.53723 4.40926 2.80477 3.75585 3.26782 3.29794ZM35.2594 27.9322C35.2594 28.601 34.997 29.2339 34.5134 29.7175C34.0349 30.196 33.3969 30.4635 32.7178 30.4635H5.07886C3.67428 30.4635 2.53723 29.3316 2.53723 27.9373V9.44107C3.2884 9.87839 4.14762 10.1511 5.07886 10.1511H32.7178C34.1172 10.1511 35.2594 11.2933 35.2594 12.6927V12.6978V15.2343H29.8983C28.54 15.2343 27.2692 15.7643 26.3225 16.7109C25.3604 17.6525 24.8305 18.9336 24.8305 20.3073C24.8305 23.1113 27.1046 25.3906 29.9035 25.3906H35.2645V27.9219C35.2594 27.927 35.2594 27.927 35.2594 27.9322ZM38.6139 22.8541H29.8983C28.504 22.8541 27.367 21.7119 27.367 20.3073C27.367 19.623 27.6242 18.9902 28.1079 18.5168C28.5915 18.0332 29.214 17.776 29.8983 17.776H38.6191V22.8541H38.6139Z" fill="white" />
@@ -64,6 +79,7 @@ const AccountPage = () => {
 
                     <Text style={styles.section2Text}> Wallet</Text>
                 </View>
+                </TouchableOpacity>
             </View>
 
             <View style={styles.walletSectionData}>

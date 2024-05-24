@@ -10,6 +10,8 @@ import ActivityPage from '@/app/pages/activityPage';
 import ServicesStack from './OtherScreens';
 import RideHailingLandingPage from '@/app/pages/rideHailing/landingPage';
 import RideHailingStack from './RideHailingRoutes';
+import WalletSreensStack from './WalletScreenRoutes';
+
 
 
 
@@ -54,7 +56,7 @@ const AppNavigator = () => {
       />
       <Tab.Screen
         name="Account"
-        component={AccountPage}
+        component={WalletSreensStack}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (

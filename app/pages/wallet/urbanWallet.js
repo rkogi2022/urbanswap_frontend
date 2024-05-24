@@ -1,13 +1,50 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useEffect } from 'react';
+import { checkTokens } from '@/functions/ValidateAuthentication';
+import { useNavigation } from '@react-navigation/native';
 
 const UrbanWallet = () => {
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    checkAndRedirect();
+  }, []);
+
+  const checkAndRedirect = async () => {
+    const hasTokens = await checkTokens();
+    if (!hasTokens) {
+      navigation.navigate('LoginScreen');
+    }
+  };
+
+  const navigateToTopUpWallet = () => {
+    navigation.navigate('TopUpWallet');
+  };
+
+  const navigateToHomepage = () => {
+    navigation.navigate('home');
+  };
+
+  const navigateToAddPaymentMethod = () => {
+    navigation.navigate('AddPaymentMethod');
+  };
+
+  const navigateToEditMpesa = () => {
+    navigation.navigate('EditMpesa');
+  };
+
+  const navigateToEditCard = () => {
+    navigation.navigate('EditCard');
+  };
+
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
-          <Text style={styles.backText}>&lt; {} Back {}</Text>
+        <TouchableOpacity onPress={navigateToHomepage}>
+          <Text style={styles.backText}>&lt; Back</Text>
         </TouchableOpacity>
         <Text style={styles.headerText}>Wallet</Text>
       </View>
@@ -20,40 +57,38 @@ const UrbanWallet = () => {
           </TouchableOpacity>
         </View>
         <Text style={styles.balanceText}>KSH 200.00</Text>
-        <TouchableOpacity style={styles.topUpButton}>
-          <Text style={styles.topUpButtonText}><Icon name="card-outline" size={15}  color="#000000;" />Top Up Wallet</Text>
+        <TouchableOpacity onPress={navigateToTopUpWallet} style={styles.topUpButton}>
+          <Text style={styles.topUpButtonText}><Icon name="card-outline" size={15} color="#000" /> Top Up Wallet</Text>
         </TouchableOpacity>
       </View>
-      
 
       <Text style={styles.paymentMethodsTitle}>Payment Methods</Text>
 
       <View style={styles.paymentMethodsContainer}>
-            {paymentMethods.map((method, index) => (
-                <View key={index}>
-                    <View style={styles.paymentMethodRow}>
-                        <Text style={styles.paymentMethodText}><Icon name={method.icon} size={24}  color="#000" />{method.name}</Text>
-                        <Text style={styles.arrowText}>{'>'}</Text>
-                    </View>
-                    {index < paymentMethods.length - 1 && <View style={styles.separator} />}
-                </View>
-            ))}
-        </View>
+                <TouchableOpacity onPress={navigateToEditMpesa} style={styles.paymentMethod}>
+                    <Text style={styles.paymentMethodText}>
+                        <Icon name="phone-portrait-outline" size={26}  color="#000000;" />M-Pesa</Text>
+                    <Icon name="chevron-forward" size={16} color="#000" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={navigateToEditCard} style={styles.paymentMethod}>
+                    <Text style={styles.paymentMethodText}><Icon name="card-outline" size={26}  color="#000" />Visa .....1122</Text>
+                    <Icon name="chevron-forward" size={16} color="#000" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={navigateToEditCard} style={styles.paymentMethod}>
+                    <Text style={styles.paymentMethodText}><Icon name="card-outline" size={26} color="blue" />Mastercard .....0439</Text>
+                    <Icon name="chevron-forward" size={16}  color="#000" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.paymentMethod}>
+                    <Text style={styles.paymentMethodText}><Icon name="cash-outline" size={26} color="blue" />Cash</Text>
+                </TouchableOpacity>
+            </View>
 
-      <TouchableOpacity style={styles.addPaymentButton}>
+      <TouchableOpacity onPress={navigateToAddPaymentMethod} style={styles.addPaymentButton}>
         <Text style={styles.addPaymentButtonText}>+ Add Payment Method</Text>
       </TouchableOpacity>
     </ScrollView>
   );
 };
-
-const paymentMethods = [
-  { name: 'M-Pesa', icon: 'phone-portrait-outline' },
-  { name: 'Visa .....1122', icon: 'card-outline' }, // use a suitable Visa icon
-  { name: 'Mastercard .....0439', icon: 'card-outline' }, // use a suitable Mastercard icon
-  { name: 'Cash', icon: 'cash-outline' },
-];
-
 
 const styles = StyleSheet.create({
   container: {
@@ -62,28 +97,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   header: {
-    alignItems: 'left',
+    alignItems: 'flex-start',
     marginBottom: 16,
   },
   backText: {
     color: 'black',
     fontSize: 16,
-    marginBottom: '5px',
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginLeft: '5px',
-    marginTop:'20px',
-    color:'darkblue',
+    marginLeft: 5,
+    marginTop: 20,
+    color: 'darkblue',
   },
   card: {
     backgroundColor: '#0061E3',
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
-    // Linear gradient background color
-    backgroundImage: 'linear-gradient(#0061E3 100%, #003173 100%)',
   },
   cardHeader: {
     flexDirection: 'row',
@@ -108,12 +140,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    width:170,
+    width: 170,
   },
   topUpButtonText: {
     color: '#000000',
     fontSize: 16,
-    alignItems:'center',
+    alignItems: 'center',
   },
   paymentMethodsTitle: {
     color: '#003D8E',
@@ -121,34 +153,33 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   paymentMethodsContainer: {
-    marginBottom: 16,
-  },
-  paymentMethodRow: {
+    marginTop: 2,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginBottom: 20,
+},
+paymentMethod: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 16,
-  },
-  paymentMethodText: {
-    color: '#000000',
-    fontSize: 18,
-  },
-  arrowText: {
-    color: '#000000',
-    fontSize: 18,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#CCCCCC',
-  },
+    width: '100%',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    justifyContent: 'space-between'
+},
+paymentMethodText: {
+    fontFamily: 'Product Sans',
+    fontSize: 16,
+    color: '#000',
+    marginLeft: 0,
+},
   addPaymentButton: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
     backgroundColor: '#E2E2E2',
     borderRadius: 8,
-    width:170,
+    width: 170,
   },
   addPaymentButtonText: {
     color: '#000000',
