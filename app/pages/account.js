@@ -90,31 +90,31 @@ const AccountPage = () => {
             <View style={styles.thirdSection}>
 
                 <Pressable  style={styles.iconData}>
-                    <Ionicons name="settings" size={15} />
+                    <Ionicons name="settings" size={20} />
                     <Text>Settings</Text>
                 </Pressable>
                 <Pressable  style={styles.iconData}>
-                    <Ionicons name="mail" size={15} />
+                    <Ionicons name="mail" size={20} />
                     <Text>Messages</Text>
                 </Pressable>
                 <Pressable  style={styles.iconData}>
-                    <Ionicons name="promotion" size={15} />
+                    <Ionicons name="promotion" size={20} />
                     <Text>Promotions</Text>
                 </Pressable>
                 <Pressable  style={styles.iconData}>
-                    <Ionicons name="account" size={15} />
+                    <Ionicons name="account" size={20} />
                     <Text>ManageAccount</Text>
                 </Pressable>
 
                 <Pressable  style={styles.iconData}>
-                    <Ionicons name="time" size={15} />
+                    <Ionicons name="time" size={20} />
                     <Text>Legal</Text>
                 </Pressable>
 
                 <Pressable style={styles.iconData} 
                 // onPress={logout()}
                 >
-                    <Ionicons name="person" size={15} />
+                    <Ionicons name="person" size={20} />
                     <Text>Logout</Text>
                 </Pressable>
 
@@ -186,10 +186,11 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     thirdSection: {
-        paddingTop: 20
+        paddingTop: 20,
     },
     iconData: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom:30,
     }
 
 });

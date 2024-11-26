@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "urban_swap",
-    "slug": "urban_swap",
+    "name": "urban-swap-frontend",
+    "slug": "urban-swap-frontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -21,7 +21,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.japhethnyaranga.urban_swap"
+      "package": "com.ritankogi.urbanswap"
     },
     "web": {
       "bundler": "metro",
@@ -39,7 +39,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "8f100fc0-f519-4eb9-90bb-501688654329"
+        "projectId": "aab93c63-c33c-4068-9b56-1c9b1177f25e"
       }
     }
   }
